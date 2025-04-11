@@ -1,0 +1,29 @@
+{
+  "name": "mathcord",
+  "version": "1.0.0",
+  "description": "A Discord Math Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gourdy09/mathcord.git"
+  },
+  "keywords": [
+    "Math",
+    "Discord",
+    "Bot",
+    "Latex",
+    "Graph"
+  ],
+  "author": "Om Patel",
+  "bugs": {
+    "url": "https://github.com/Gourdy09/mathcord/issues"
+  },
+  "homepage": "https://github.com/Gourdy09/mathcord#readme",
+  "dependencies": {
+    "discord.js": "^14.18.0",
+    "dotenv": "^16.5.0"
+  }
+}
