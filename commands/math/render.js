@@ -8,7 +8,7 @@ const sharp = require("sharp");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("math")
+    .setName("render")
     .setDescription("Converts a math expression to a PNG image")
     .addStringOption((option) =>
       option
@@ -81,7 +81,7 @@ module.exports = {
         name: "equation.png",
       });
 
-      const pfp = new AttachmentBuilder("../../images/pfp.png", {
+      const pfp = new AttachmentBuilder("./images/pfp.png", {
         name: "pfp.png",
       });
 
@@ -101,7 +101,7 @@ module.exports = {
       // Send the embed with the attachment
       await interaction.editReply({
         embeds: [sendEmbed],
-        files: [attachment],
+        files: [attachment, pfp],
       });
     } catch (error) {
       console.error("Error processing math command:", error);
