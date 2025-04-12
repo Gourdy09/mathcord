@@ -31,6 +31,7 @@
     "katex": "^0.16.22",
     "latex.js": "^0.12.6",
     "mathjax-node": "^2.1.1",
+    "mathjs": "^14.4.0",
     "sharp": "^0.34.1",
     "svg2img": "^1.0.0-beta.2"
   }
