@@ -23,7 +23,15 @@
   },
   "homepage": "https://github.com/Gourdy09/mathcord#readme",
   "dependencies": {
+    "axios": "^1.8.4",
+    "canvas": "^3.1.0",
     "discord.js": "^14.18.0",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "jsdom": "^26.0.0",
+    "katex": "^0.16.22",
+    "latex.js": "^0.12.6",
+    "mathjax-node": "^2.1.1",
+    "sharp": "^0.34.1",
+    "svg2img": "^1.0.0-beta.2"
   }
 }
