@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  AttachmentBuilder,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,7 +20,7 @@ module.exports = {
 
     const pingEmbed = new EmbedBuilder()
       .setColor("#DC143C")
-      .setTitle("🏓 Pong!")
+      .setTitle("Pong!")
       .setDescription(`Response time is \`${latency}ms\``)
       .addFields({
         name: "Support Mathcord",
@@ -25,6 +29,10 @@ module.exports = {
       .setTimestamp()
       .setFooter({ text: "Mathcord", iconURL: "attachment://pfp.png" });
 
-    await interaction.editReply({ content: "", embeds: [pingEmbed], files: [pfp] });
+    await interaction.editReply({
+      content: "",
+      embeds: [pingEmbed],
+      files: [pfp],
+    });
   },
 };
