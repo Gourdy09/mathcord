@@ -5,43 +5,118 @@ const math = require("mathjs");
 // Maximum size for matrices
 const MAX_MATRIX_SIZE = 5;
 
-// Parse matrix input from a string
+// Parse matrix input from a string with precise character-by-character processing
 function parseMatrix(matrixStr) {
   try {
-    // Clean up input and split by rows
-    const cleanInput = matrixStr
-      .trim()
-      .replace(/\[\s*\[/g, "[[")
-      .replace(/\]\s*\]/g, "]]")
-      .replace(/\]\s*,\s*\[/g, "],[");
+    // Remove all whitespace
+    const input = matrixStr.trim().replace(/\s+/g, "");
 
-    // Remove the outer brackets if present
-    let processedInput = cleanInput;
-    if (processedInput.startsWith("[[") && processedInput.endsWith("]]")) {
-      processedInput = processedInput.substring(1, processedInput.length - 1);
-    } else if (processedInput.startsWith("[") && processedInput.endsWith("]")) {
-      processedInput = processedInput;
-    } else {
-      // Add outer brackets if not present
-      processedInput = "[" + processedInput + "]";
+    // Function to extract a number from the input starting at a specific index
+    function extractNumber(str, startIndex) {
+      let numStr = "";
+      let i = startIndex;
+
+      // Handle negative numbers
+      if (str[i] === "-") {
+        numStr += "-";
+        i++;
+      }
+
+      // Extract digits and decimal point
+      while (
+        i < str.length &&
+        ((str[i] >= "0" && str[i] <= "9") ||
+          str[i] === "." ||
+          str[i] === "e" ||
+          str[i] === "E" || // Handle scientific notation
+          (str[i] === "-" && (str[i - 1] === "e" || str[i - 1] === "E"))) // Handle negative exponent
+      ) {
+        numStr += str[i];
+        i++;
+      }
+
+      return {
+        value: parseFloat(numStr),
+        endIndex: i - 1,
+      };
     }
 
-    // Parse the matrix
-    const matrix = math.evaluate(processedInput);
+    // Initialize matrix as 2D array
+    let matrix = [];
+    let currentRow = [];
 
-    // Ensure it's a matrix and not too large
-    if (!math.isMatrix(matrix)) {
-      throw new Error("Input is not a valid matrix");
+    // Process input character by character
+    let i = 0;
+    while (i < input.length) {
+      const char = input[i];
+
+      if (char === "[") {
+        // Start of a new row or the entire matrix
+        if (i > 0 && input[i - 1] !== "[" && input[i - 1] !== ",") {
+          // This is a nested opening bracket, ignore
+        } else {
+          // Reset current row if starting a new one
+          if (currentRow.length > 0 && input[i - 1] !== "[") {
+            matrix.push(currentRow);
+            currentRow = [];
+          }
+        }
+        i++;
+      } else if (char === "]") {
+        // End of a row or the entire matrix
+        if (currentRow.length > 0) {
+          matrix.push(currentRow);
+          currentRow = [];
+        }
+        i++;
+      } else if (char === ",") {
+        // Just skip commas
+        i++;
+      } else if (char === ";") {
+        // Semicolon indicates end of row
+        if (currentRow.length > 0) {
+          matrix.push(currentRow);
+          currentRow = [];
+        }
+        i++;
+      } else if ((char >= "0" && char <= "9") || char === "-" || char === ".") {
+        // This is the start of a number
+        const result = extractNumber(input, i);
+        currentRow.push(result.value);
+        i = result.endIndex + 1;
+      } else {
+        // Unknown character
+        throw new Error(`Unexpected character '${char}' at position ${i}`);
+      }
     }
 
-    const size = matrix.size();
-    if (size[0] > MAX_MATRIX_SIZE || size[1] > MAX_MATRIX_SIZE) {
+    // Handle case where the final row wasn't added
+    if (currentRow.length > 0) {
+      matrix.push(currentRow);
+    }
+
+    // Validate matrix dimensions
+    if (matrix.length === 0) {
+      throw new Error("Empty matrix");
+    }
+
+    // Check that all rows have the same length
+    const rowLength = matrix[0].length;
+    for (let i = 1; i < matrix.length; i++) {
+      if (matrix[i].length !== rowLength) {
+        throw new Error("Inconsistent row lengths in matrix");
+      }
+    }
+
+    // Check size constraints
+    if (matrix.length > MAX_MATRIX_SIZE || rowLength > MAX_MATRIX_SIZE) {
       throw new Error(
         `Matrix is too large. Maximum size is ${MAX_MATRIX_SIZE}x${MAX_MATRIX_SIZE}`
       );
     }
 
-    return matrix;
+    // Convert to mathjs matrix
+    return math.matrix(matrix);
   } catch (error) {
     throw new Error(`Failed to parse matrix: ${error.message}`);
   }
