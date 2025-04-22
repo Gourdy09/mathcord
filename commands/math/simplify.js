@@ -900,7 +900,11 @@ module.exports = {
         .setDescription(description)
         .addFields(
           { name: "Original", value: `\`${originalExpression}\`` },
-          { name: "Result", value: `\`${resultExpression}\`` }
+          { name: "Result", value: `\`${resultExpression}\`` },
+          {
+            name: "Support Mathcord",
+            value: "discord.gg/UPJPVXspee",
+          }
         )
         .setTimestamp()
         .setFooter({ text: "Mathcord", iconURL: "attachment://pfp.png" });

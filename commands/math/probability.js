@@ -160,7 +160,7 @@ module.exports = {
         .setTitle("Error")
         .setDescription(`${error.message}`)
         .addFields(
-          { name: "Support Mathcord", value: "https://github.com/Gourdy09/mathcord" }
+          { name: "Support Mathcord", value: "discord.gg/UPJPVXspee" }
         )
         .setTimestamp()
         .setFooter({ text: "Mathcord", iconURL: "attachment://pfp.png" });

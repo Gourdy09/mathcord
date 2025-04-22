@@ -402,7 +402,7 @@ module.exports = {
         .setFooter({ text: "Mathcord", iconURL: "attachment://pfp.png" })
         .addFields({
           name: "Support Mathcord",
-          value: "https://github.com/Gourdy09/mathcord",
+          value: "discord.gg/UPJPVXspee",
         });
 
       let params = {};

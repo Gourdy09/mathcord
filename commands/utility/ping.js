@@ -24,7 +24,7 @@ module.exports = {
       .setDescription(`Response time is \`${latency}ms\``)
       .addFields({
         name: "Support Mathcord",
-        value: "https://github.com/Gourdy09/mathcord",
+        value: "discord.gg/UPJPVXspee",
       })
       .setTimestamp()
       .setFooter({ text: "Mathcord", iconURL: "attachment://pfp.png" });

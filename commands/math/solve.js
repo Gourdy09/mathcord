@@ -600,7 +600,11 @@ module.exports = {
         .setDescription(`Here's the solution to your equation:`)
         .addFields(
           { name: "Input", value: `\`${inputEquation}\`` },
-          { name: "Result", value: `\`${result}\`` }
+          { name: "Result", value: `\`${result}\`` },
+          {
+            name: "Support Mathcord",
+            value: "discord.gg/UPJPVXspee",
+          }
         )
         .setTimestamp()
         .setFooter({ text: "Mathcord", iconURL: "attachment://pfp.png" });

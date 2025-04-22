@@ -230,7 +230,7 @@ module.exports = {
         )
         .addFields({
           name: "Support Mathcord",
-          value: "https://github.com/Gourdy09/mathcord",
+          value: "discord.gg/UPJPVXspee",
         })
         .setImage("attachment://graph.png")
         .setTimestamp()

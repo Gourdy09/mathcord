@@ -38,7 +38,7 @@ module.exports = {
         },
         {
           name: "Support Mathcord",
-          value: "https://github.com/Gourdy09/mathcord",
+          value: "discord.gg/UPJPVXspee",
         }
       )
       .setTimestamp()
